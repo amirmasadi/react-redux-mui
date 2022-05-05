@@ -12,17 +12,27 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
-import { grey } from "@mui/material/colors";
+import { grey, green, blue, red } from "@mui/material/colors";
 
 const Puller = styled(Box)(({ theme }) => ({
   width: 60,
   height: 5,
-  backgroundColor: theme.palette.mode === 'light' ? grey[400] : grey[900],
+  backgroundColor: theme.palette.mode === "light" ? grey[400] : grey[900],
   borderRadius: 3,
-  position: 'absolute',
+  position: "absolute",
   top: 8,
-  left: 'calc(50% - 30px)',
-})); 
+  left: "calc(50% - 30px)",
+}));
+
+function priorityColorHandler(pri) {
+  if (pri === "low") {
+    return "success";
+  } else if (pri === "normal") {
+    return "info";
+  } else {
+    return "error";
+  }
+}
 
 export default function Drawer({ showDrawer, setShowDrawer }) {
   const [priority, SetPriority] = useState("low");
@@ -54,7 +64,7 @@ export default function Drawer({ showDrawer, setShowDrawer }) {
             exclusive
             onChange={(e) => SetPriority(e.target.value)}
             fullWidth
-            color="info"
+            color={`${priorityColorHandler(priority)}`}
           >
             <ToggleButton value={"low"}>Low</ToggleButton>
             <ToggleButton value={"normal"}>Normal</ToggleButton>
