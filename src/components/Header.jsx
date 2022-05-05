@@ -13,7 +13,7 @@ import { DoneOutline } from "@mui/icons-material";
 export default function Header() {
   return (
     <Box>
-      <AppBarStyled elevation="false" position="static">
+      <AppBarStyled elevation={0} position="static">
         <Toolbar>
           <DoneOutline color="primary" />
           <Typography
