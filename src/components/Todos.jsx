@@ -5,20 +5,20 @@ import Masonry from "@mui/lab/Masonry";
 const tasks = [
   {
     todo: "dasdasdja lkdj slkjdlak jskjd akjs kj kajskd jsakda ;lk",
-    priority: 1,
+    priority: "low",
   },
   {
     todo: "linkdin account...asdasd asdasd asdada dasadasda dadadasda da",
-    priority: 1,
+    priority: "low",
   },
-  { todo: "learn redasdasux", priority: 2 },
-  { todo: "water", priority: 3 },
+  { todo: "learn redasdasux", priority: "normal" },
+  { todo: "water", priority: "high" },
 ];
 
 export default function Todos() {
   return (
     <Box sx={{}}>
-      <Masonry columns={3} spacing={2} sx={{ padding: 1 }}>
+      <Masonry columns={{sm: 2, md: 3}} spacing={2} sx={{ padding: 1 }}>
         {tasks.map((t, index) => (
           <TodoItem task={t.todo} index={index} priority={t.priority} key={index} />
         ))}
