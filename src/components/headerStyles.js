@@ -1,4 +1,4 @@
-import { styled } from "@mui/material/styles";
+import styled from "@emotion/styled";
 import AppBar from "@mui/material/AppBar";
 import InputBase from "@mui/material/InputBase";
 
