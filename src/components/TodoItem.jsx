@@ -8,25 +8,8 @@ import ArchiveIcon from "@mui/icons-material/Archive";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useState, useRef } from "react";
-import { StyledMenu } from "./todoItem-styles";
-import { green, blue, red } from "@mui/material/colors";
-
-const TodoStyled = styled(Box)(() => ({
-  textAlign: "center",
-  borderRadius: 10,
-  padding: 20,
-  position: "relative",
-  marginTop: "35px",
-}));
-
-const TodoNumStyled = styled(Typography)(() => ({
-  fontFamily: "fantasy",
-  position: "absolute",
-  top: 0,
-  left: 5,
-  fontWeight: 900,
-  zIndex: -1,
-}));
+import { StyledMenu, TodoStyled, TodoNumStyled } from "./todoItem-styles";
+import { green, blue, red, grey } from "@mui/material/colors";
 
 function priorityColorHandler(pri) {
   if (pri === "low") {
@@ -43,7 +26,11 @@ export default function TodoItem({ task, index, priority }) {
   const moreIconRef = useRef();
 
   return (
-    <TodoStyled sx={{ border: `1px solid ${priorityColorHandler(priority)}` }}>
+    <TodoStyled
+      sx={{
+        border: `1px solid ${priorityColorHandler(priority)}`,
+      }}
+    >
       <IconButton
         ref={moreIconRef}
         sx={{ position: "absolute", bottom: 4, right: 0 }}
@@ -84,7 +71,7 @@ export default function TodoItem({ task, index, priority }) {
       >
         0{index + 1}
       </TodoNumStyled>
-      <Typography variant="h6" sx={{ color: "#565656" }}>
+      <Typography variant="h6" sx={{ color: grey[700]}}>
         {task}
       </Typography>
     </TodoStyled>

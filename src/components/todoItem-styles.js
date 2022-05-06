@@ -1,5 +1,24 @@
-import { alpha, Menu } from "@mui/material";
+import { alpha, Box, Menu, Typography } from "@mui/material";
 import styled from "@emotion/styled";
+import { chipsAnimation } from "../animations";
+
+export const TodoStyled = styled(Box)(() => ({
+  textAlign: "center",
+  borderRadius: 10,
+  padding: 20,
+  position: "relative",
+  marginTop: "35px",
+  animation: `${chipsAnimation} 0.6s cubic-bezier(0.190, 1.000, 0.220, 1.000) both`,
+}));
+
+export const TodoNumStyled = styled(Typography)(() => ({
+  fontFamily: "fantasy",
+  position: "absolute",
+  top: 0,
+  left: 5,
+  fontWeight: 900,
+  zIndex: -1,
+}));
 
 export const StyledMenu = styled((props) => (
   <Menu

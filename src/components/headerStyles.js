@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
+import { Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import InputBase from "@mui/material/InputBase";
+import { slideDownAnimation } from "../animations";
+import { textAnimation } from "../animations";
 
 export const AppBarStyled = styled(AppBar)((theme) => ({
   backgroundColor: "#fff",
@@ -18,6 +21,7 @@ export const Search = styled("div")(({ theme }) => ({
   },
   backgroundColor: "#F3F9FF",
   color: "#565656",
+  animation: `${slideDownAnimation} 0.5s both`,
 }));
 
 export const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -45,4 +49,12 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
       },
     },
   },
+}));
+
+export const LogoText = styled(Typography)(() => ({
+  flexGrow: 1,
+  fontWeight: "bold",
+  display: { xs: "none", sm: "block" },
+  animation: `${textAnimation} 0.7s cubic-bezier(0.860, 0.000, 0.070, 1.000) both`,
+  fontStyle: "italic",
 }));

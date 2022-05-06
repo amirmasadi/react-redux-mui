@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { Box, Stack, Chip, Typography } from "@mui/material";
 import { useState } from "react";
+import { chipsAnimation, textAnimation } from "../animations";
 
 const TagSecStyled = styled(Box)(({ theme }) => ({
-  // maxWidth:300,
   position: "fixed",
   top: "30%",
   textAlign: "center",
@@ -18,13 +18,17 @@ export default function TagSection() {
     "cat",
     "work",
     "sag",
-    "cat",
-    "work",
   ]);
 
   return (
     <TagSecStyled>
-      <Typography variant="h5" sx={{ marginBottom: 2 }}>
+      <Typography
+        variant="h5"
+        sx={{
+          marginBottom: 2,
+          animation: `${textAnimation} 0.7s cubic-bezier(0.860, 0.000, 0.070, 1.000) both`,
+        }}
+      >
         Filter by #Tags:
       </Typography>
       <Stack
@@ -40,7 +44,9 @@ export default function TagSection() {
             label={t}
             key={i}
             onClick={() => console.log("first")}
-            // color="info"
+            sx={{
+              animation: `${chipsAnimation} 0.9s cubic-bezier(0.190, 1.000, 0.220, 1.000) both`,
+            }}
           />
         ))}
       </Stack>

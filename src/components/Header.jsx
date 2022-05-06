@@ -7,29 +7,25 @@ import {
   Search,
   SearchIconWrapper,
   StyledInputBase,
+  LogoText,
 } from "./headerStyles";
 import { DoneOutline } from "@mui/icons-material";
+import { chipsAnimation } from "../animations";
 
 export default function Header() {
   return (
     <Box>
       <AppBarStyled elevation={0} position="static">
         <Toolbar>
-          <DoneOutline color="primary" />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
+          <DoneOutline
             color="primary"
             sx={{
-              textDecoration: "italic",
-              flexGrow: 1,
-              fontWeight: "bold",
-              display: { xs: "none", sm: "block" },
+              animation: `${chipsAnimation} 0.9s cubic-bezier(0.190, 1.000, 0.220, 1.000) both`,
             }}
-          >
-            <i>TODO</i>
-          </Typography>
+          />
+          <LogoText variant="h6" noWrap component="div" color="primary">
+            TODO
+          </LogoText>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
