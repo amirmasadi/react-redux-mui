@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
-import { grey, green, blue, red } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
 const Puller = styled(Box)(({ theme }) => ({
   width: 60,

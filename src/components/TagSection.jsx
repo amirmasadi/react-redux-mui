@@ -3,15 +3,10 @@ import { Box, Stack, Chip, Typography } from "@mui/material";
 import { useState } from "react";
 
 const TagSecStyled = styled(Box)(({ theme }) => ({
+  // maxWidth:300,
   position: "fixed",
   top: "30%",
-  right: "5%",
-  transform: "translateY(-50%)",
-  textAlign: "center",
-  maxWidth:240,
-  [theme.breakpoints.down("md")]: {
-    display: "none",
-  },
+  textAlign:"center",
 }));
 
 export default function TagSection() {
