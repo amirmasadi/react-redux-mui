@@ -2,7 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: [
-    { task: "Example", priority: "low", tags: ["Example"], _id: 23123123213 },
+    {
+      task: "Example",
+      priority: "low",
+      tags: ["Example"],
+      isComplete: false,
+      _id: 23123123213,
+    },
   ],
 };
 
@@ -16,8 +22,15 @@ export const todosSlice = createSlice({
     deleteTask: (state, action) => {
       state.value = state.value.filter((task) => task._id !== action.payload);
     },
+    completeTask: (state, action) => {
+      state.value.map((task) => {
+        if (task._id === action.payload) {
+          task.isComplete = !task.isComplete;
+        }
+      });
+    },
   },
 });
 
-export const { addTask, deleteTask } = todosSlice.actions;
+export const { addTask, deleteTask, completeTask } = todosSlice.actions;
 export default todosSlice.reducer;

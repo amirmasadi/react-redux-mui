@@ -8,28 +8,44 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useState, useRef } from "react";
 import { StyledMenu, TodoStyled, TodoNumStyled } from "./todoItem-styles";
 import { green, blue, red, grey } from "@mui/material/colors";
-import { AddTask, deleteTask } from "../features/todosSlice";
+import { AddTask, deleteTask, completeTask } from "../features/todosSlice";
 import { useDispatch } from "react-redux";
 
-function priorityColorHandler(pri) {
-  if (pri === "low") {
-    return green[500];
-  } else if (pri === "normal") {
-    return blue[500];
-  } else {
-    return red[500];
-  }
-}
-
-export default function TodoItem({ task, index, priority, tags, id }) {
+export default function TodoItem({
+  task,
+  index,
+  priority,
+  tags,
+  isComplete,
+  id,
+}) {
   const [menu, setMenu] = useState(false);
   const moreIconRef = useRef();
 
   const dispatch = useDispatch();
 
+  function priorityColorHandler() {
+    if (isComplete) {
+      return grey[500];
+    } else {
+      if (priority === "low") {
+        return green[500];
+      } else if (priority === "normal") {
+        return blue[500];
+      } else {
+        return red[500];
+      }
+    }
+  }
+
   function delTaskHandler() {
     setMenu(false);
     dispatch(deleteTask(id));
+  }
+
+  function completeHandler() {
+    setMenu(false);
+    dispatch(completeTask(id));
   }
 
   return (
@@ -58,9 +74,9 @@ export default function TodoItem({ task, index, priority, tags, id }) {
           <EditIcon />
           Edit
         </MenuItem>
-        <MenuItem onClick={() => setMenu(false)} disableRipple>
+        <MenuItem onClick={() => completeHandler()} disableRipple>
           <CheckCircleIcon />
-          Complete
+          {isComplete ? "Incomplete" : "Complete"}
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={() => delTaskHandler()} disableRipple>
@@ -74,7 +90,13 @@ export default function TodoItem({ task, index, priority, tags, id }) {
       >
         0{index + 1}
       </TodoNumStyled>
-      <Typography variant="h6" sx={{ color: grey[700] }}>
+      <Typography
+        variant="h6"
+        sx={{
+          color: grey[700],
+          textDecoration: isComplete ? "line-through" : "auto",
+        }}
+      >
         {task}
       </Typography>
     </TodoStyled>

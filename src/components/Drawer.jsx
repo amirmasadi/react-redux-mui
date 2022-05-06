@@ -72,7 +72,9 @@ export default function Drawer({ showDrawer, setShowDrawer }) {
   function addTaskHandler() {
     setError(false);
     if (task) {
-      dispatch(addTask({ task, priority, tags, _id: uuidv4() }));
+      dispatch(
+        addTask({ task, priority, tags, isComplete: false, _id: uuidv4() })
+      );
       setShowDrawer(false);
       setTags([]);
       setTask("");

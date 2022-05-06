@@ -3,19 +3,6 @@ import TodoItem from "./TodoItem";
 import Masonry from "@mui/lab/Masonry";
 import { useSelector } from "react-redux";
 
-const tasks = [
-  {
-    todo: "dasdasdja lkdj slkjdlak jskjd akjs kj kajskd jsakda ;lk",
-    priority: "low",
-  },
-  {
-    todo: "linkdin account...asdasd asdasd asdada dasadasda dadadasda da",
-    priority: "low",
-  },
-  { todo: "learn redasdasux", priority: "normal" },
-  { todo: "water", priority: "high" },
-];
-
 export default function Todos() {
   const storedTodos = useSelector((state) => state.todos.value);
 
@@ -32,6 +19,7 @@ export default function Todos() {
             index={index}
             priority={t.priority}
             tags={t.tags}
+            isComplete={t.isComplete}
             id={t._id}
             key={t._id}
           />
