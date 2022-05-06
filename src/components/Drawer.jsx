@@ -35,9 +35,33 @@ function priorityColorHandler(pri) {
 }
 
 export default function Drawer({ showDrawer, setShowDrawer }) {
-  const [priority, SetPriority] = useState("low");
-  const [tags, setTags] = useState(["sag", "cat", "work"]);
+  const [task, setTask] = useState("");
+  const [priority, setPriority] = useState("low");
+  const [tags, setTags] = useState(["work", "learning", "other"]);
+  const [tagsInput, setTagsInput] = useState("");
 
+  function tagsHandler(e) {
+    e.preventDefault();
+    setTagsInput(e.target.value);
+    console.log(e);
+    if (tagsInput.length > 2) {
+      if (
+        e.nativeEvent.data === "Enter" ||
+        e.nativeEvent.data === " " ||
+        e.nativeEvent.data === ","
+      ) {
+        const inputValue = tagsInput.replace(/,/g, "").trim();
+        if (tags.indexOf(inputValue) === -1) {
+          setTags([...tags, inputValue]);
+        }
+        setTagsInput("");
+      }
+    }
+  }
+
+  function tagsDelHandler(chip) {
+    setTags(tags.filter((tag) => tag !== chip));
+  }
   return (
     <SwipeableDrawer
       anchor="bottom"
@@ -58,11 +82,13 @@ export default function Drawer({ showDrawer, setShowDrawer }) {
             fullWidth
             multiline
             rows="2"
+            value={task}
+            onChange={(e) => setTask(e.target.value)}
           />
           <ToggleButtonGroup
             value={priority}
             exclusive
-            onChange={(e) => SetPriority(e.target.value)}
+            onChange={(e) => setPriority(e.target.value)}
             fullWidth
             color={`${priorityColorHandler(priority)}`}
           >
@@ -70,21 +96,24 @@ export default function Drawer({ showDrawer, setShowDrawer }) {
             <ToggleButton value={"normal"}>Normal</ToggleButton>
             <ToggleButton value={"high"}>High</ToggleButton>
           </ToggleButtonGroup>
-          <TextField variant="outlined" label="#Tags" fullWidth size="small" />
+          <TextField
+            variant="outlined"
+            label="#Tags"
+            placeholder="Separate by 'comma' or 'space'"
+            fullWidth
+            size="small"
+            value={tagsInput}
+            onChange={(ev) => tagsHandler(ev)}
+          />
           <Stack
             sx={{ width: "100%", transform: "translateY(-15px)" }}
             direction="row"
             justifyContent="start"
-            spacing={2}
+            gap={1}
             flexWrap="wrap"
           >
             {tags.map((t, i) => (
-              <Chip
-                label={t}
-                key={i}
-                onClick={() => console.log("first")}
-                onDelete={() => console.log("first")}
-              />
+              <Chip label={t} key={i} onDelete={() => tagsDelHandler(t)} />
             ))}
           </Stack>
           <Button fullWidth variant="contained">

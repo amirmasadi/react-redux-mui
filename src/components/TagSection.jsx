@@ -6,11 +6,21 @@ const TagSecStyled = styled(Box)(({ theme }) => ({
   // maxWidth:300,
   position: "fixed",
   top: "30%",
-  textAlign:"center",
+  textAlign: "center",
 }));
 
 export default function TagSection() {
-  const [tags, setTags] = useState(["sag", "cat", "wsadasdasdork","sag", "cat", "work","sag", "cat", "work"]);
+  const [tags, setTags] = useState([
+    "sag",
+    "cat",
+    "wsadasdasdork",
+    "sag",
+    "cat",
+    "work",
+    "sag",
+    "cat",
+    "work",
+  ]);
 
   return (
     <TagSecStyled>
@@ -22,10 +32,10 @@ export default function TagSection() {
         direction="row"
         justifyContent="center"
         flexWrap="wrap"
+        gap={1}
       >
         {tags.map((t, i) => (
           <Chip
-          sx={{margin: 1}}
             variant="outlined"
             label={t}
             key={i}
