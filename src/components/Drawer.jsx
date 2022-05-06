@@ -13,6 +13,8 @@ import {
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
+import { addTask } from "../features/todosSlice";
+import { useDispatch } from "react-redux";
 
 const Puller = styled(Box)(({ theme }) => ({
   width: 60,
@@ -37,8 +39,11 @@ function priorityColorHandler(pri) {
 export default function Drawer({ showDrawer, setShowDrawer }) {
   const [task, setTask] = useState("");
   const [priority, setPriority] = useState("low");
-  const [tags, setTags] = useState(["work", "learning", "other"]);
+  const [tags, setTags] = useState(["Example"]);
   const [tagsInput, setTagsInput] = useState("");
+  const [error, setError] = useState(false);
+
+  const dispatch = useDispatch();
 
   function tagsHandler(e) {
     e.preventDefault();
@@ -62,6 +67,19 @@ export default function Drawer({ showDrawer, setShowDrawer }) {
   function tagsDelHandler(chip) {
     setTags(tags.filter((tag) => tag !== chip));
   }
+
+  function addTaskHandler() {
+    setError(false);
+    if (task) {
+      dispatch(addTask({ task, priority, tags }));
+      setShowDrawer(false);
+      setTags([]);
+      setTask("");
+      setPriority("low");
+    } else {
+      setError(true);
+    }
+  }
   return (
     <SwipeableDrawer
       anchor="bottom"
@@ -84,6 +102,8 @@ export default function Drawer({ showDrawer, setShowDrawer }) {
             rows="2"
             value={task}
             onChange={(e) => setTask(e.target.value)}
+            error={error}
+            focused={error}
           />
           <ToggleButtonGroup
             value={priority}
@@ -116,7 +136,11 @@ export default function Drawer({ showDrawer, setShowDrawer }) {
               <Chip label={t} key={i} onDelete={() => tagsDelHandler(t)} />
             ))}
           </Stack>
-          <Button fullWidth variant="contained">
+          <Button
+            fullWidth
+            variant="contained"
+            onClick={() => addTaskHandler()}
+          >
             Add
           </Button>
         </Stack>

@@ -1,6 +1,5 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { styled } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 import EditIcon from "@mui/icons-material/Edit";
 import Divider from "@mui/material/Divider";
@@ -21,7 +20,7 @@ function priorityColorHandler(pri) {
   }
 }
 
-export default function TodoItem({ task, index, priority }) {
+export default function TodoItem({ task, index, priority, tags }) {
   const [menu, setMenu] = useState(false);
   const moreIconRef = useRef();
 
@@ -71,7 +70,7 @@ export default function TodoItem({ task, index, priority }) {
       >
         0{index + 1}
       </TodoNumStyled>
-      <Typography variant="h6" sx={{ color: grey[700]}}>
+      <Typography variant="h6" sx={{ color: grey[700] }}>
         {task}
       </Typography>
     </TodoStyled>
