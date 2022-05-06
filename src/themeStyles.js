@@ -15,4 +15,7 @@ export const theme = createTheme({
     },
     divider: "#b0bec5",
   },
+  typography: {
+    fontFamily: "verdana",
+  },
 });

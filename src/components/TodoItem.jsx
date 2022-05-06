@@ -20,6 +20,7 @@ const TodoStyled = styled(Box)(() => ({
 }));
 
 const TodoNumStyled = styled(Typography)(() => ({
+  fontFamily: "fantasy",
   position: "absolute",
   top: 0,
   left: 5,
