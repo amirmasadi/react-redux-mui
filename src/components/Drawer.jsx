@@ -15,6 +15,7 @@ import { styled } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 import { addTask } from "../features/todosSlice";
 import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 const Puller = styled(Box)(({ theme }) => ({
   width: 60,
@@ -71,7 +72,7 @@ export default function Drawer({ showDrawer, setShowDrawer }) {
   function addTaskHandler() {
     setError(false);
     if (task) {
-      dispatch(addTask({ task, priority, tags }));
+      dispatch(addTask({ task, priority, tags, _id: uuidv4() }));
       setShowDrawer(false);
       setTags([]);
       setTask("");

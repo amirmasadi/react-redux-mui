@@ -32,7 +32,8 @@ export default function Todos() {
             index={index}
             priority={t.priority}
             tags={t.tags}
-            key={index}
+            id={t._id}
+            key={t._id}
           />
         ))}
       </Masonry>

@@ -3,12 +3,13 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuItem from "@mui/material/MenuItem";
 import EditIcon from "@mui/icons-material/Edit";
 import Divider from "@mui/material/Divider";
-import ArchiveIcon from "@mui/icons-material/Archive";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useState, useRef } from "react";
 import { StyledMenu, TodoStyled, TodoNumStyled } from "./todoItem-styles";
 import { green, blue, red, grey } from "@mui/material/colors";
+import { AddTask, deleteTask } from "../features/todosSlice";
+import { useDispatch } from "react-redux";
 
 function priorityColorHandler(pri) {
   if (pri === "low") {
@@ -20,9 +21,16 @@ function priorityColorHandler(pri) {
   }
 }
 
-export default function TodoItem({ task, index, priority, tags }) {
+export default function TodoItem({ task, index, priority, tags, id }) {
   const [menu, setMenu] = useState(false);
   const moreIconRef = useRef();
+
+  const dispatch = useDispatch();
+
+  function delTaskHandler() {
+    setMenu(false);
+    dispatch(deleteTask(id));
+  }
 
   return (
     <TodoStyled
@@ -51,17 +59,13 @@ export default function TodoItem({ task, index, priority, tags }) {
           Edit
         </MenuItem>
         <MenuItem onClick={() => setMenu(false)} disableRipple>
-          <FileCopyIcon />
-          Duplicate
+          <CheckCircleIcon />
+          Complete
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={() => setMenu(false)} disableRipple>
-          <ArchiveIcon />
-          Archive
-        </MenuItem>
-        <MenuItem onClick={() => setMenu(false)} disableRipple>
-          <MoreHorizIcon />
-          More
+        <MenuItem onClick={() => delTaskHandler()} disableRipple>
+          <DeleteIcon />
+          Delete
         </MenuItem>
       </StyledMenu>
       <TodoNumStyled
