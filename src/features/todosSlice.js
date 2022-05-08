@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   value: [
     {
-      task: "Example",
+      task: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       priority: "low",
-      tags: ["Example"],
+      tags: ["Example", "low"],
       isComplete: false,
       _id: 23123123213,
     },
@@ -23,7 +23,7 @@ export const todosSlice = createSlice({
       state.value = state.value.filter((task) => task._id !== action.payload);
     },
     completeTask: (state, action) => {
-      state.value.map((task) => {
+      state.value.forEach((task) => {
         if (task._id === action.payload) {
           task.isComplete = !task.isComplete;
         }

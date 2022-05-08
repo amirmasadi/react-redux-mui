@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { Box, Stack, Chip, Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { chipsAnimation, textAnimation } from "../animations";
+import { useSelector } from "react-redux";
 
 const TagSecStyled = styled(Box)(({ theme }) => ({
   position: "fixed",
@@ -10,15 +11,15 @@ const TagSecStyled = styled(Box)(({ theme }) => ({
 }));
 
 export default function TagSection() {
-  const [tags, setTags] = useState([
-    "sag",
-    "cat",
-    "wsadasdasdork",
-    "sag",
-    "cat",
-    "work",
-    "sag",
-  ]);
+  const [tags, setTags] = useState(["Complete", "Incomplete"]);
+
+  const storedTodos = useSelector((state) => state.todos.value);
+
+  useEffect(() => {
+    storedTodos.forEach((task) => {
+      setTags([...new Set([...tags, ...task.tags])]);
+    });
+  }, [storedTodos]);
 
   return (
     <TagSecStyled>
@@ -43,7 +44,7 @@ export default function TagSection() {
             variant="outlined"
             label={t}
             key={i}
-            onClick={() => console.log("first")}
+            onClick={() => console.log(tags)}
             sx={{
               animation: `${chipsAnimation} 0.9s cubic-bezier(0.190, 1.000, 0.220, 1.000) both`,
             }}

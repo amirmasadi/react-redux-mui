@@ -49,7 +49,6 @@ export default function Drawer({ showDrawer, setShowDrawer }) {
   function tagsHandler(e) {
     e.preventDefault();
     setTagsInput(e.target.value);
-    console.log(e);
     if (tagsInput.length > 2) {
       if (
         e.nativeEvent.data === "Enter" ||
@@ -73,7 +72,13 @@ export default function Drawer({ showDrawer, setShowDrawer }) {
     setError(false);
     if (task) {
       dispatch(
-        addTask({ task, priority, tags, isComplete: false, _id: uuidv4() })
+        addTask({
+          task,
+          priority,
+          tags: [...tags, priority],
+          isComplete: false,
+          _id: uuidv4(),
+        })
       );
       setShowDrawer(false);
       setTags([]);

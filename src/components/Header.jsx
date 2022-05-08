@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   AppBarStyled,
@@ -11,8 +10,11 @@ import {
 } from "./headerStyles";
 import { DoneOutline } from "@mui/icons-material";
 import { chipsAnimation } from "../animations";
+import { useState } from "react";
 
 export default function Header() {
+  const [searchInput, setSearchInput] = useState("");
+
   return (
     <Box>
       <AppBarStyled elevation={0} position="static">
@@ -31,6 +33,8 @@ export default function Header() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.targer.value)}
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
