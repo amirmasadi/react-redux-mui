@@ -1,17 +1,24 @@
 import { Box } from "@mui/material";
 import TodoItem from "./TodoItem";
-import Masonry from "@mui/lab/Masonry";
 import { useSelector } from "react-redux";
+import Masonry from "react-masonry-css";
 
 export default function Todos() {
   const storedTodos = useSelector((state) => state.todos.value);
 
+  const breakpointColumnsObj = {
+    default: 3,
+    1100: 3,
+    700: 2,
+    500: 1
+  };
+
   return (
     <Box>
       <Masonry
-        columns={{ sm: 2, md: 3 }}
-        spacing={2}
-        sx={{ padding: 1, margin: 0 }}
+        breakpointCols={breakpointColumnsObj}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
       >
         {storedTodos.map((t, index) => (
           <TodoItem

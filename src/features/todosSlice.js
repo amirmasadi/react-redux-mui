@@ -3,11 +3,25 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   value: [
     {
-      task: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      task: "Lorem ipsum dolor sit amet",
       priority: "low",
       tags: ["Example", "low"],
       isComplete: false,
-      _id: 23123123213,
+      _id: 123,
+    },
+    {
+      task: "add a new todo, dont forget to add tags to find them more easily",
+      priority: "high",
+      tags: ["high"],
+      isComplete: false,
+      _id: 321,
+    },
+    {
+      task: "consectetur adipiscing elit",
+      priority: "normal",
+      tags: ["normal"],
+      isComplete: true,
+      _id: 456,
     },
   ],
 };

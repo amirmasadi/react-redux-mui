@@ -7,7 +7,7 @@ export const TodoStyled = styled(Box)(() => ({
   borderRadius: 10,
   padding: 20,
   position: "relative",
-  marginTop: "35px",
+  marginTop: "10px",
   animation: `${chipsAnimation} 0.6s cubic-bezier(0.190, 1.000, 0.220, 1.000) both`,
 }));
 

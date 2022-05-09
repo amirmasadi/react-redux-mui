@@ -11,7 +11,7 @@ const TagSecStyled = styled(Box)(({ theme }) => ({
 }));
 
 export default function TagSection() {
-  const [tags, setTags] = useState(["Complete", "Incomplete"]);
+  const [tags, setTags] = useState(["ALL", "Complete", "Incomplete"]);
 
   const storedTodos = useSelector((state) => state.todos.value);
 
