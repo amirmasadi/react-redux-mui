@@ -29,8 +29,16 @@ export const todosSlice = createSlice({
         }
       });
     },
+    editTask: (state, action) => {
+      state.value.forEach((task) => {
+        if (task._id === action.payload.id) {
+          task.task = action.payload.editedTask;
+        }
+      });
+    },
   },
 });
 
-export const { addTask, deleteTask, completeTask } = todosSlice.actions;
+export const { addTask, deleteTask, completeTask, editTask } =
+  todosSlice.actions;
 export default todosSlice.reducer;

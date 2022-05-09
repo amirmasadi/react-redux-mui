@@ -1,4 +1,4 @@
-import { IconButton, Typography } from "@mui/material";
+import { IconButton, TextField, Typography } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuItem from "@mui/material/MenuItem";
 import EditIcon from "@mui/icons-material/Edit";
@@ -8,7 +8,11 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useState, useRef } from "react";
 import { StyledMenu, TodoStyled, TodoNumStyled } from "./todoItem-styles";
 import { green, blue, red, grey } from "@mui/material/colors";
-import { AddTask, deleteTask, completeTask } from "../features/todosSlice";
+import {
+  deleteTask,
+  completeTask,
+  editTask,
+} from "../features/todosSlice";
 import { useDispatch } from "react-redux";
 
 export default function TodoItem({
@@ -20,6 +24,7 @@ export default function TodoItem({
   id,
 }) {
   const [menu, setMenu] = useState(false);
+  const [editing, setEditing] = useState(false);
   const moreIconRef = useRef();
 
   const dispatch = useDispatch();
@@ -44,8 +49,23 @@ export default function TodoItem({
   }
 
   function completeHandler() {
+    setEditing(false);
     setMenu(false);
     dispatch(completeTask(id));
+  }
+
+  function editHandler() {
+    setEditing(!editing);
+    setMenu(false);
+    // dispatch(completeTask(id));
+  }
+
+  function editSubmitHandler(ev) {
+    if (ev.which === 13) {
+      dispatch(editTask({ id, editedTask: ev.target.value }));
+      setEditing(false);
+      setMenu(false);
+    }
   }
 
   return (
@@ -70,9 +90,9 @@ export default function TodoItem({
         open={menu}
         onClose={() => setMenu(false)}
       >
-        <MenuItem onClick={() => setMenu(false)} disableRipple>
+        <MenuItem onClick={() => editHandler()} disableRipple>
           <EditIcon />
-          Edit
+          {editing ? "Discard" : "Edit"}
         </MenuItem>
         <MenuItem onClick={() => completeHandler()} disableRipple>
           <CheckCircleIcon />
@@ -90,15 +110,27 @@ export default function TodoItem({
       >
         0{index + 1}
       </TodoNumStyled>
-      <Typography
-        variant="h6"
-        sx={{
-          color: grey[700],
-          textDecoration: isComplete ? "line-through" : "auto",
-        }}
-      >
-        {task}
-      </Typography>
+      {!editing ? (
+        <Typography
+          variant="h6"
+          sx={{
+            color: grey[700],
+            textDecoration: isComplete ? "line-through" : "auto",
+          }}
+        >
+          {task}
+        </Typography>
+      ) : (
+        <TextField
+          id="standard-multiline-static"
+          label="Edit"
+          multiline
+          defaultValue={task}
+          variant="standard"
+          onKeyDown={(e) => editSubmitHandler(e)}
+          sx={{ textAlign: "center" }}
+        />
+      )}
     </TodoStyled>
   );
 }
