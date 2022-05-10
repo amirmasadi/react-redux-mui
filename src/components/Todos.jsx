@@ -8,8 +8,7 @@ export default function Todos() {
 
   const breakpointColumnsObj = {
     default: 3,
-    1100: 3,
-    700: 2,
+    1000: 2,
     500: 1
   };
 

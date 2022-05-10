@@ -2,26 +2,10 @@ import styled from "@emotion/styled";
 import { Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import InputBase from "@mui/material/InputBase";
-import { slideDownAnimation } from "../animations";
 import { textAnimation } from "../animations";
 
 export const AppBarStyled = styled(AppBar)((theme) => ({
-  backgroundColor: "#fff",
   borderBottom: "1px solid #F3F9FF",
-}));
-
-export const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: "30px",
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-  backgroundColor: "#F3F9FF",
-  color: "#565656",
-  animation: `${slideDownAnimation} 0.5s both`,
 }));
 
 export const SearchIconWrapper = styled("div")(({ theme }) => ({

@@ -1,19 +1,18 @@
-import { IconButton, TextField, Typography } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import MenuItem from "@mui/material/MenuItem";
-import EditIcon from "@mui/icons-material/Edit";
-import Divider from "@mui/material/Divider";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { useTheme } from "@emotion/react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { useState, useRef } from "react";
-import { StyledMenu, TodoStyled, TodoNumStyled } from "./todoItem-styles";
-import { green, blue, red, grey } from "@mui/material/colors";
-import {
-  deleteTask,
-  completeTask,
-  editTask,
-} from "../features/todosSlice";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { IconButton, TextField, Typography } from "@mui/material";
+import { blue, green, grey, red } from "@mui/material/colors";
+import Divider from "@mui/material/Divider";
+import MenuItem from "@mui/material/MenuItem";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import {
+  completeTask, deleteTask, editTask
+} from "../features/todosSlice";
+import { StyledMenu, TodoNumStyled, TodoStyled } from "./todoItem-styles";
 
 export default function TodoItem({
   task,
@@ -26,7 +25,8 @@ export default function TodoItem({
   const [menu, setMenu] = useState(false);
   const [editing, setEditing] = useState(false);
   const moreIconRef = useRef();
-
+  const muiTheme = useTheme()
+  console.log(muiTheme)
   const dispatch = useDispatch();
 
   function priorityColorHandler() {
@@ -114,7 +114,7 @@ export default function TodoItem({
         <Typography
           variant="h6"
           sx={{
-            color: grey[700],
+            color: muiTheme.palette.text.secondary,
             textDecoration: isComplete ? "line-through" : "auto",
           }}
         >
