@@ -1,26 +1,47 @@
 import { Box } from "@mui/material";
 import TodoItem from "./TodoItem";
-import Masonry from "@mui/lab/Masonry";
-
-const tasks = [
-  {
-    todo: "dasdasdja lkdj slkjdlak jskjd akjs kj kajskd jsakda ;lk",
-    priority: "low",
-  },
-  {
-    todo: "linkdin account...asdasd asdasd asdada dasadasda dadadasda da",
-    priority: "low",
-  },
-  { todo: "learn redasdasux", priority: "normal" },
-  { todo: "water", priority: "high" },
-];
+import { useSelector } from "react-redux";
+import Masonry from "react-masonry-css";
 
 export default function Todos() {
+  const storedTodos = useSelector((state) => state.todos.value);
+  const activeTag = useSelector((state) => state.tagFilter.value);
+
+  function filterTodos() {
+    if (activeTag === "all") {
+      return storedTodos;
+    } else if (activeTag === "incomplete") {
+      return storedTodos.filter((item) => item.isComplete === false);
+    } else if (activeTag === "complete") {
+      return storedTodos.filter((item) => item.isComplete === true);
+    } else {
+      return storedTodos.filter((item) => item.tags.includes(activeTag));
+    }
+  }
+
+  const breakpointColumnsObj = {
+    default: 3,
+    1000: 2,
+    500: 1,
+  };
+
   return (
     <Box>
-      <Masonry columns={{sm: 2, md: 3}} spacing={2} sx={{ padding: 1, margin: 0 }}>
-        {tasks.map((t, index) => (
-          <TodoItem task={t.todo} index={index} priority={t.priority} key={index} />
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {filterTodos().map((t, index) => (
+          <TodoItem
+            task={t.task}
+            index={index}
+            priority={t.priority}
+            tags={t.tags}
+            isComplete={t.isComplete}
+            id={t._id}
+            key={t._id}
+          />
         ))}
       </Masonry>
     </Box>

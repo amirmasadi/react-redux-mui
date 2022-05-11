@@ -19,10 +19,11 @@ function Layout() {
       <Container maxWidth="md">
         <Header />
       </Container>
-      <Stack direction="row">
+      <Stack direction="row" color={"text.primary"}>
         <MdNone>
           <LeftSidebar />
         </MdNone>
+
         <Box sx={{ flex: 3 }}>
           <Container maxWidth="md">
             <Todos />
