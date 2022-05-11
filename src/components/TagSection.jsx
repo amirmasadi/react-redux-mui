@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
-import { Box, Stack, Chip, Typography } from "@mui/material";
-import { useState, useEffect } from "react";
-import { chipsAnimation, textAnimation } from "../animations";
+import { Box, Chip, Stack, Typography } from "@mui/material";
+import { createSelector } from "@reduxjs/toolkit";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { chipsAnimation, textAnimation } from "../animations";
 
 const TagSecStyled = styled(Box)(({ theme }) => ({
   position: "fixed",
@@ -10,16 +11,25 @@ const TagSecStyled = styled(Box)(({ theme }) => ({
   textAlign: "center",
 }));
 
-export default function TagSection() {
-  const [tags, setTags] = useState(["ALL", "Complete", "Incomplete"]);
+const selectNumCompletedTodos = createSelector(
+  (state) => state.todos.value,
+  (todos) => todos.map((todo) => todo.tags)
+);
 
-  const storedTodos = useSelector((state) => state.todos.value);
+export default function TagSection() {
+  const [tags, setTags] = useState([]);
+
+  const storedTags = useSelector(selectNumCompletedTodos);
 
   useEffect(() => {
-    storedTodos.forEach((task) => {
-      setTags([...new Set([...tags, ...task.tags])]);
+    const allTags = [];
+    storedTags.forEach(function (childArray) {
+      childArray.forEach(function (item) {
+        allTags.push(item);
+      });
     });
-  }, [storedTodos]);
+    setTags([...new Set(["ALL", "Complete", "Incomplete", ...allTags])]);
+  }, [storedTags]);
 
   return (
     <TagSecStyled>

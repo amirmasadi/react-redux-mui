@@ -26,7 +26,6 @@ export default function TodoItem({
   const [editing, setEditing] = useState(false);
   const moreIconRef = useRef();
   const muiTheme = useTheme()
-  console.log(muiTheme)
   const dispatch = useDispatch();
 
   function priorityColorHandler() {
