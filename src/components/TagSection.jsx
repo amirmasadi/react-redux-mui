@@ -2,8 +2,10 @@ import styled from "@emotion/styled";
 import { Box, Chip, Stack, Typography } from "@mui/material";
 import { createSelector } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { chipsAnimation, textAnimation } from "../animations";
+import { changeFilter } from "../features/tagsFilterSlice";
+import { useTheme } from "@mui/material/styles";
 
 const TagSecStyled = styled(Box)(({ theme }) => ({
   position: "fixed",
@@ -18,8 +20,13 @@ const selectNumCompletedTodos = createSelector(
 
 export default function TagSection() {
   const [tags, setTags] = useState([]);
+  const dispatch = useDispatch();
 
+  //retrive data from redux
   const storedTags = useSelector(selectNumCompletedTodos);
+  const activeTag = useSelector((state) => state.tagFilter.value);
+
+  const muiTheme = useTheme();
 
   useEffect(() => {
     const allTags = [];
@@ -54,7 +61,8 @@ export default function TagSection() {
             variant="outlined"
             label={t}
             key={i}
-            onClick={() => console.log(tags)}
+            onClick={() => dispatch(changeFilter(t.toLowerCase()))}
+            color={activeTag === t.toLowerCase() ? "primary" : "secondary"}
             sx={{
               animation: `${chipsAnimation} 0.9s cubic-bezier(0.190, 1.000, 0.220, 1.000) both`,
             }}

@@ -5,7 +5,7 @@ const initialState = {
     {
       task: "Lorem ipsum dolor sit amet",
       priority: "low",
-      tags: ["Example", "low"],
+      tags: ["example", "low"],
       isComplete: false,
       _id: 123,
     },
