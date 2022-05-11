@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import { Box, Chip, Stack, Typography } from "@mui/material";
+import { grey, blue } from "@mui/material/colors";
 import { createSelector } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { chipsAnimation, textAnimation } from "../animations";
 import { changeFilter } from "../features/tagsFilterSlice";
-import { useTheme } from "@mui/material/styles";
 
-const TagSecStyled = styled(Box)(({ theme }) => ({
+const TagSecStyled = styled(Box)(() => ({
   position: "fixed",
   top: "30%",
   textAlign: "center",
@@ -25,8 +25,6 @@ export default function TagSection() {
   //retrive data from redux
   const storedTags = useSelector(selectNumCompletedTodos);
   const activeTag = useSelector((state) => state.tagFilter.value);
-
-  const muiTheme = useTheme();
 
   useEffect(() => {
     const allTags = [];
@@ -62,9 +60,12 @@ export default function TagSection() {
             label={t}
             key={i}
             onClick={() => dispatch(changeFilter(t.toLowerCase()))}
-            color={activeTag === t.toLowerCase() ? "primary" : "secondary"}
+            // color={activeTag === t.toLowerCase() ? "primary" : "secondary"}
             sx={{
               animation: `${chipsAnimation} 0.9s cubic-bezier(0.190, 1.000, 0.220, 1.000) both`,
+              borderColor:
+                activeTag === t.toLowerCase() ? blue[500] : grey[500],
+              color: activeTag === t.toLowerCase() ? blue[500] : grey[500],
             }}
           />
         ))}

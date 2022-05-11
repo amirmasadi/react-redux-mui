@@ -9,23 +9,20 @@ import Divider from "@mui/material/Divider";
 import MenuItem from "@mui/material/MenuItem";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  completeTask, deleteTask, editTask
-} from "../features/todosSlice";
+import { completeTask, deleteTask, editTask } from "../features/todosSlice";
 import { StyledMenu, TodoNumStyled, TodoStyled } from "./todoItem-styles";
 
 export default function TodoItem({
   task,
   index,
   priority,
-  tags,
   isComplete,
   id,
 }) {
   const [menu, setMenu] = useState(false);
   const [editing, setEditing] = useState(false);
   const moreIconRef = useRef();
-  const muiTheme = useTheme()
+  const muiTheme = useTheme();
   const dispatch = useDispatch();
 
   function priorityColorHandler() {

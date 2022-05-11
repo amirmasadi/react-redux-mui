@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import TodoItem from "./TodoItem";
 import { useSelector } from "react-redux";
 import Masonry from "react-masonry-css";
