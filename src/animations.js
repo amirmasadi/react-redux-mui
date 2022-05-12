@@ -44,3 +44,10 @@ export const slideDownAnimation = keyframes`0% {
             transform: translateY(0);
     opacity: 1;
   }`;
+
+export const fadeOut = keyframes`  0% {
+  opacity: 1;
+}
+100% {
+  opacity: 0;
+}`;

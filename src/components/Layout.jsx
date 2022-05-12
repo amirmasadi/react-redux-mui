@@ -4,6 +4,7 @@ import { Container, Stack, Box } from "@mui/material";
 import Todos from "./Todos";
 import TagSection from "./TagSection";
 import LeftSidebar from "./LeftSidebar";
+import SnackbarComponent from "./SnackbarComponent";
 import styled from "@emotion/styled";
 
 const MdNone = styled(Box)(({ theme }) => ({
@@ -33,6 +34,7 @@ function Layout() {
           <TagSection />
         </MdNone>
       </Stack>
+      <SnackbarComponent />
       <AddTaskBtn />
     </>
   );

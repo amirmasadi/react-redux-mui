@@ -11,14 +11,9 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { completeTask, deleteTask, editTask } from "../features/todosSlice";
 import { StyledMenu, TodoNumStyled, TodoStyled } from "./todoItem-styles";
+import { showSnackbar } from "../features/snackbarSlice";
 
-export default function TodoItem({
-  task,
-  index,
-  priority,
-  isComplete,
-  id,
-}) {
+export default function TodoItem({ task, index, priority, isComplete, id }) {
   const [menu, setMenu] = useState(false);
   const [editing, setEditing] = useState(false);
   const moreIconRef = useRef();
@@ -39,8 +34,16 @@ export default function TodoItem({
     }
   }
 
+  function snackbarHnadler(msg) {
+    dispatch(showSnackbar({ open: true, msg }));
+    setTimeout(() => {
+      dispatch(showSnackbar({ open: false, msg }));
+    }, 2000);
+  }
+
   function delTaskHandler() {
     setMenu(false);
+    snackbarHnadler("Task Deleted");
     dispatch(deleteTask(id));
   }
 
@@ -48,12 +51,12 @@ export default function TodoItem({
     setEditing(false);
     setMenu(false);
     dispatch(completeTask(id));
+    snackbarHnadler(isComplete ? "Task Incompleted" : "Task Completed");
   }
 
   function editHandler() {
     setEditing(!editing);
     setMenu(false);
-    // dispatch(completeTask(id));
   }
 
   function editSubmitHandler(ev) {
@@ -61,6 +64,7 @@ export default function TodoItem({
       dispatch(editTask({ id, editedTask: ev.target.value }));
       setEditing(false);
       setMenu(false);
+      snackbarHnadler("Task Edited");
     }
   }
 
