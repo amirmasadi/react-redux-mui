@@ -35,10 +35,10 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const LogoText = styled(Typography)(() => ({
+export const LogoText = styled(Typography)({
   flexGrow: 1,
   fontWeight: "bold",
   display: { xs: "none", sm: "block" },
   animation: `${textAnimation} 0.7s cubic-bezier(0.860, 0.000, 0.070, 1.000) both`,
   fontStyle: "italic",
-}));
+});
